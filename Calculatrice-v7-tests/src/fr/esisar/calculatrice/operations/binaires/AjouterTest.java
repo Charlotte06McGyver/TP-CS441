@@ -3,6 +3,7 @@ package fr.esisar.calculatrice.operations.binaires;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -39,14 +40,23 @@ public class AjouterTest {
 	
 	@Test
 	void ThreePositiveArguments () throws CalculatriceException {
-		assertDoesNotThrow(() -> ajouter.calculer(5.0, 1.0, 2.0));
+		assertThrows(CalculatriceException.class, () -> ajouter.calculer(5.0, 1.0, 2.0));
 	}
 	
 	@Test
 	void ThreeNegativeArguments () throws CalculatriceException {
-		assertDoesNotThrow(() -> ajouter.calculer(-5.0, -1.0, -2.0));
+		assertThrows(CalculatriceException.class, () -> ajouter.calculer(-5.0, -1.0, -2.0));
 	}
 	
+	@Test
+	void OnePositiveArgument () throws CalculatriceException {
+		assertThrows(CalculatriceException.class, () -> ajouter.calculer(5.0));
+	}
+	
+	@Test
+	void OneNegativeArgument () throws CalculatriceException {
+		assertThrows(CalculatriceException.class, () -> ajouter.calculer(-5.0));
+	}
 
 	
 }

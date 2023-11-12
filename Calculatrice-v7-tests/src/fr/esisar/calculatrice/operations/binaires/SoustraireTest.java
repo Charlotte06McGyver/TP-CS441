@@ -2,7 +2,7 @@ package fr.esisar.calculatrice.operations.binaires;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ public class SoustraireTest {
 	private final Soustraire soustraire = new Soustraire();
 	
 	@Test
-	void shouldGetNomPlusSign() {
+	void shouldGetNomMinusSign() {
 		assertEquals("-", soustraire.getNom());
 	}
 	
@@ -40,7 +40,7 @@ public class SoustraireTest {
 	
 	@Test
 	void NullNumber () throws CalculatriceException {
-		assertEquals(-5.0, soustraire.calculer(5.0, 0.0));
+		assertEquals(5.0, soustraire.calculer(5.0, 0.0));
 	}
 	
 	@Test
@@ -60,12 +60,21 @@ public class SoustraireTest {
 	
 	@Test
 	void ThreePositiveArguments () throws CalculatriceException {
-		assertDoesNotThrow( () -> soustraire.calculer(5.0, 1.0, 2.0));
+		assertThrows(CalculatriceException.class, () -> soustraire.calculer(5.0, 1.0, 2.0));
 	}
 	
 	@Test
 	void ThreeNegativeArguments () throws CalculatriceException {
-		assertDoesNotThrow(() -> soustraire.calculer(-5.0, -1.0, -2.0));
+		assertThrows(CalculatriceException.class, () -> soustraire.calculer(-5.0, -1.0, -2.0));
 	}
-
+	
+	@Test
+	void OnePositiveArgument () throws CalculatriceException {
+		assertThrows(CalculatriceException.class, () -> soustraire.calculer(5.0));
+	}
+	
+	@Test
+	void OneNegativeArgument () throws CalculatriceException {
+		assertThrows(CalculatriceException.class, () -> soustraire.calculer(-5.0));
+	}
 }

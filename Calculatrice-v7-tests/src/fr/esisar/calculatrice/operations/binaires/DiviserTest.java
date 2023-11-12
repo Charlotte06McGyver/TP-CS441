@@ -14,7 +14,7 @@ public class DiviserTest {
 private final Diviser diviser = new Diviser();
 	
 	@Test
-	void shouldGetNomPlusSign() {
+	void shouldGetNomDivSign() {
 		assertEquals("/", diviser.getNom());
 	}
 	
@@ -26,6 +26,16 @@ private final Diviser diviser = new Diviser();
 	@Test
 	void NegativeNumber () throws CalculatriceException {
 		assertDoesNotThrow(() -> diviser.calculer(-6.0,-2.0));
+	}
+	
+	@Test
+	void Divideby1 () throws CalculatriceException {
+		assertEquals(6.0,  diviser.calculer(6.0,1.0));
+	}
+	
+	@Test
+	void Divide1 () throws CalculatriceException {
+		assertDoesNotThrow(() ->  diviser.calculer(1.0,2.0));
 	}
 	
 	@Test
@@ -41,12 +51,22 @@ private final Diviser diviser = new Diviser();
 	
 	@Test
 	void ThreePositiveArguments () throws CalculatriceException {
-		assertDoesNotThrow(() -> diviser.calculer(25.0, 1.0, 5.0));
+		assertThrows(CalculatriceException.class, () -> diviser.calculer(5.0, 1.0, 2.0));
 	}
 	
 	@Test
 	void ThreeNegativeArguments () throws CalculatriceException {
-		assertDoesNotThrow(() -> diviser.calculer(-25.0, -1.0, -5.0));
+		assertThrows(CalculatriceException.class, () -> diviser.calculer(-5.0, -1.0, -2.0));
+	}
+	
+	@Test
+	void OnePositiveArgument () throws CalculatriceException {
+		assertThrows(CalculatriceException.class, () -> diviser.calculer(5.0));
+	}
+	
+	@Test
+	void OneNegativeArgument () throws CalculatriceException {
+		assertThrows(CalculatriceException.class, () -> diviser.calculer(-5.0));
 	}
 	
 	@Test
