@@ -1,15 +1,25 @@
 package fr.esisar.hierarchie;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Manager extends Employe{
 
+	private static final Logger LOGGER = LogManager.getLogger(Manager.class);
 	
 	public Manager(String numEmploye, String nom) {
 		super(numEmploye, nom);
 	}
 	
 	public void addSubordonne(Employe employe) {
-		subordonnes.add(employe);	
+		if (employe.estsubordonne == null) {
+			subordonnes.add(employe);
+			employe.estsubordonne = this;
+		}
+		else {
+			LOGGER.warn("Cet employé a déjà un manager !");
+		}
+	
 	}
 
 	public void removeSubordonne (Employe employe) {

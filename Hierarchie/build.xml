@@ -1,0 +1,66 @@
+<project name = "Hierarchie" basedir ="." default = "sonar" xmlns:sonar="antlib:org.sonar.ant">
+	
+	<property name = "srcdir" value = "src"/>
+	<property name = "builddir" value = "build"/>
+	<property name = "classesdir" value = "${builddir}/classes"/>
+	<property name = "jardir" value = "jar"/>
+	<property name = "projectname" value = "hierarchie.jar"/>
+	<property name = "docdir" value = "doc"/>
+	<property name = "lib" value = "lib"/>
+
+			
+	<!-- SonarQube connection details -->
+	<property name="sonar.host.url" value="http://sonar.esisar.grenoble-inp.fr:9000" />
+	<property name="sonar.projectKey" value="HierarchieCasarrubios" />
+	<property name="sonar.projectName" value="HierarchieCasarrubios" />
+	<property name="sonar.token"
+	value="sqp_8ef5ee8ee082ef730191b1db03f6deb141ce57c7" />
+	<property name="sonar.sources" value="${srcdir}" />
+	<property name="sonar.language" value="java"/>
+	<property name="sonar.java.binaries" value="${classesdir}" />
+	
+	
+	
+	<target name = "compile"  depends = "clean">
+		<mkdir dir = "${classesdir}"/>
+		<javac srcdir = "${srcdir}" destdir = "${classesdir}" includeantruntime = "false" >
+			<classpath>
+				<fileset dir="${lib}" includes="log4j*.jar"/>
+			</classpath>
+		</javac>
+	</target>
+	
+	<target name = "package" depends = "compile">
+		<mkdir dir = "${jardir}"/>
+		<jar destfile = "${jardir}/${projectname}" basedir = "${classesdir}">
+			<manifest>
+				<attribute name = "Main-Class" value = "fr.esisar.hierarchie.EntrepriseTestDrive"/>
+			</manifest>
+			<zipgroupfileset dir="${lib}">
+				<include name="**/log4j*.jar"/>
+			</zipgroupfileset>
+		</jar>
+	</target>		
+	
+	<target name = "run" depends = "package">
+		<java jar = "${jardir}/${projectname}" fork = "true">
+			<arg value="-Dlog4j.configurationFile=log4j2.xml" />
+		</java>
+
+	</target>
+	
+	<target name = "clean">
+		<delete dir = "${classesdir}"/>
+		<delete dir = "${docdir}"/>
+	</target>
+	
+	<taskdef uri="antlib:org.sonar.ant" resource="org/sonar/ant/antlib.xml">
+	<classpath path="${lib}/sonarqube-ant-task-2.7.1.1951.jar" />
+	</taskdef>
+	
+	<target name="sonar" depends="run">
+	<!-- Execute SonarScanner for Ant Analysis -->
+	<sonar:sonar />
+	</target>
+			
+</project>
