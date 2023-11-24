@@ -24,27 +24,19 @@ public class EntrepriseTestDrive {
 
 		
 		Ouvrier ouvrierTemporaire = new Ouvrier("7000", "Trent");
-		Manager managerTemporaire = new Manager("7001", "Brad"); 
 		
 		Ouvrier ouvrier6 = new Ouvrier("9999","alex");
 
 		manager1.addSubordonne(ouvrier1);
-		LOGGER.info("L'ouvrier Smith a été rajouté à la hierarchie");
 		manager1.addSubordonne(manager2);
-		LOGGER.info("Le manager Blake a été rajouté à la hierarchie");
 		manager2.addSubordonne(ouvrier2);
-		LOGGER.info("L'ouvrier Jones a été rajouté à la hierarchie");
 		manager2.addSubordonne(ouvrier3);
-		LOGGER.info("L'ouvrier Allen a été rajouté à la hierarchie");
 		manager3.addSubordonne(ouvrier4);
-		LOGGER.info("L'ouvrier James a été rajouté à la hierarchie");
+
 		
 		chef.addSubordonne(ouvrier5);
-		LOGGER.info("L'ouvrier Martin a été rajouté à la hierarchie");
 		chef.addSubordonne(manager1);
-		LOGGER.info("Le manager Adams a été rajouté à la hierarchie");
 		chef.addSubordonne(manager3);
-		LOGGER.info("Le manager Scott a été rajouté à la hierarchie");
 
 		
 		LOGGER.info("Subordonnes de Ford : "+chef.countEmployes());
@@ -56,6 +48,11 @@ public class EntrepriseTestDrive {
 		LOGGER.info("Subordonnes de Blake : "+manager3.countEmployes());
 		manager3.removeSubordonne(ouvrier6);
 		LOGGER.info("Subordonnes de Blake : "+manager3.countEmployes());
+		
+		
+		manager1.addSubordonne(ouvrierTemporaire);
+		manager2.addSubordonne(ouvrierTemporaire);
+		
 		
 		
 

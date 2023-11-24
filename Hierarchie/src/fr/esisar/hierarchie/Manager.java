@@ -15,15 +15,17 @@ public class Manager extends Employe{
 		if (employe.estsubordonne == null) {
 			subordonnes.add(employe);
 			employe.estsubordonne = this;
+			LOGGER.info("L'employé "+employe.nom+" a été ajouté à la hiérarchie");
 		}
 		else {
-			LOGGER.warn("Cet employé a déjà un manager !");
+			LOGGER.warn("Le salarié "+employe.nom+" a déjà un manager !");
 		}
 	
 	}
 
 	public void removeSubordonne (Employe employe) {
 		subordonnes.remove(employe);
+		LOGGER.info("L'employé "+employe.nom+" a été supprimé de la hiérarchie");
 	}
 
 	@Override

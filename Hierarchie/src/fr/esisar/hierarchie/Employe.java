@@ -14,7 +14,7 @@ public abstract class Employe {
 	protected Employe(String numEmploye, String nom) {
 		this.numEmploye=numEmploye;
 		this.nom=nom;
-		this.estsubordonne=null; //s'il est nul, alors il ne possède pas de manager
+		this.estsubordonne = null; //s'il est nul, alors il ne possède pas de manager
 	}
 
 	public abstract String getNumEmploye();
