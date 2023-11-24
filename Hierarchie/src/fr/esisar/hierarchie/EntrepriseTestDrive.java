@@ -3,10 +3,22 @@ package fr.esisar.hierarchie;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * Classe de tests d'une hiérarchie d'entreprise
+ * Tests des méthodes implémentées et de l'utilisation des LOGGER
+ * @author Charlotte Casarrubios
+ * @version 1.0
+ */
+
 public class EntrepriseTestDrive {
 	
 	private static final Logger LOGGER = LogManager.getLogger(EntrepriseTestDrive.class);
 	
+	
+	/**
+	 * Main de la classe 
+	 * @param args	Arguments en entrée du main (ici aucun argument car utilisée pour des tests)
+	 */
 	public static void main(String[] args){
 		
 		Ouvrier ouvrier1 = new Ouvrier("7369", "Smith");

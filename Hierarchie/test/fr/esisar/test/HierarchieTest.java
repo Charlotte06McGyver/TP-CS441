@@ -9,6 +9,12 @@ import org.junit.jupiter.api.Test;
 
 import fr.esisar.hierarchie.*;
 
+/**
+ * Classe de tests d'une hiérarchie d'entreprise
+ * @author Charlotte Casarrubios
+ * @version 1.0
+ */
+
 public class HierarchieTest {
 	
 	private final Ouvrier ouvrier1 = new Ouvrier("7369", "Smith");
@@ -28,6 +34,10 @@ public class HierarchieTest {
 	private final Ouvrier ouvrierTemporaire = new Ouvrier("7000", "Trent");
 	private final Manager managerTemporaire = new Manager("7001", "Brad");
 	
+	
+	/**
+	 * Initialise la hiérarchie d'une entreprise avant chaque test
+	 */
 	@BeforeEach 
 	public void createHierarchie () {
 		
@@ -42,6 +52,9 @@ public class HierarchieTest {
 		chef.addSubordonne(manager3);
 	}
 	
+	/**
+	 * Teste l'ajout d'un ouvrier sous la direction d'un manager
+	 */
 	@Test
 	void ouvrierToManager () {
 		manager1.addSubordonne(ouvrierTemporaire);
@@ -58,7 +71,9 @@ public class HierarchieTest {
 		manager1.removeSubordonne(ouvrierTemporaire);
 	}
 	
-	
+	/**
+	 * Teste l'ajout d'un manager sous la direction d'un autre manager
+	 */
 	@Test
 	void managerToManager () {
 		manager2.addSubordonne(managerTemporaire);
@@ -75,6 +90,9 @@ public class HierarchieTest {
 		manager2.removeSubordonne(managerTemporaire);
 	}
 	
+	/**
+	 * Teste l'ajout d'un ouvrier sous la direction d'un deuxième manager
+	 */
 	@Test
 	void plusieursManager () {
 		manager1.addSubordonne(ouvrier2);
@@ -88,6 +106,9 @@ public class HierarchieTest {
 		
 	}
 		
+	/**
+	 * Supprime la hiérarchie implémentée d'une entreprise après chaque test
+	 */
 	@AfterEach
 	public void cleanHierarchie () {
 		manager1.removeSubordonne(ouvrier1);
